@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <i class="fas fa-check"></i>
+</head>
+<body style="width: 500px;">
+    <h1><img src="icon_40.png" alt="GEEmoteLogo" style="text-align: center">GE Twitch Emotes</img>
+    </h1>
+    <p style="text-align: center; font-size: large; font-weight: bold;">adds costume chat Emotes</p>
+    <hr>
+    <h2>GE Twitch emotes:</h2>
+    <input type="text" class="SearchBar" id="mySearch" placeholder="Search a emote" title="Search for a Emote">
+    <div id="twitch-embed"></div>
+    <span class="grid-container" id="myMenu">
+    </span>
+</body>
+<style>
+    :root {
+        --MainBackgroundColor: hsl(143, 99%, 27%);
+        --MainBackgroundColor-Secondary: hsl(143, 100%, 23%);
+        --EmoteTooltipBackgroundColor: hsl(0, 0%, 6%);
+        --EmoteListBackgroundColor: hsl(184, 100%, 22%);
+        --scrollBarTrack: hsl(143, 100%, 23%);
+        --scrollBarThumb: hsl(0, 0%, 19%);
+        --scrollBarThumbSelect: hsl(0, 0%, 14%);
+    }
+
+    li::marker {
+        content: ""
+    }
+
+    .SearchBar {
+        width: 100%;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+        cursor: copy;
+    }
+    p {
+        padding-top: 2px;
+        margin-top: 2px;
+        cursor: pointer;
+    }
+    .Emotetooltiptext {
+        cursor: default;
+    }
+    h1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    h2 {
+        text-align: center;
+    }
+    html {
+        background-color: var(--MainBackgroundColor);
+        border-color: var(--MainBackgroundColor-Secondary);
+        border-radius: 5px;
+        border-width: 10px;
+        border-style: solid;
+    }
+
+    html, body, hr {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    hr {
+        background-color: var(--MainBackgroundColor);
+        border-color: var(--MainBackgroundColor-Secondary);
+        border-width: 10px;
+        border-style: solid;
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .grid-container {
+        background-color: var(--EmoteListBackgroundColor);
+        border-color: hsl(0, 0%, 0%);
+        border-radius: 5px;
+        border-width: 4px;
+        border-style: solid;
+    }
+
+    .CostumeEmotesDis {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* Tooltip container */
+    .Emotetooltip {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Tooltip text */
+    .Emotetooltip .Emotetooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: var(--EmoteTooltipBackgroundColor);
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+    
+        /* Position the tooltip text - see examples below! */
+        position: absolute;
+        z-index: 1;
+    }
+
+    /* Show the tooltip text when you mouse over the tooltip container */
+    .Emotetooltip:hover .Emotetooltiptext {
+        visibility: visible;
+    }
+</style>
+<style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      padding: 10px;
+    }
+    .Emotetooltip {
+      padding: 10px;
+      text-align: center;
+    }
+    ::-webkit-scrollbar {
+        width: 3vw;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: var(--scrollBarTrack);
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--scrollBarThumb);
+        border-radius: 50px;
+        border-color: var(--scrollBarTrack);
+        border-width: 2px;
+        border-style: solid;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollBarThumbSelect);
+    }
+
+    @supports (scrollbar-color: var(--scrollBarThumb) var(--scrollBarTrack)) {
+        * {
+            scrollbar-color: var(--scrollBarThumb) var(--scrollBarTrack)
+        }
+    }
+</style>
+<script src="JQuery/jquery.min.js"></script>
+<script src="popup.js" defer></script>
+</html>

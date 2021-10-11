@@ -1,0 +1,33 @@
+{
+    "name": "GET-Emotes",
+    "version": "0.0.0.1",
+    "manifest_version": 2,
+    "description": "adds costume and public emotes and gifs to twitch!",
+    "author": "Goldenegg000",
+    "permissions": [
+        "tabs"
+    ],
+
+    "icons": {
+        "40": "icon_40.png"
+    },
+
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+
+    "web_accessible_resources": [
+        "JQuery/jquery.min.js"
+    ],
+
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "20": "icon_20.png",
+            "40": "icon_40.png"
+        }
+    },
+
+    "content_scripts": [{
+        "matches": ["https://www.twitch.tv/*", "https://dashboard.twitch.tv/*"],
+        "js": ["content.js"]
+    }]
+}
