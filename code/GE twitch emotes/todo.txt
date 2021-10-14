@@ -1,0 +1,17 @@
+DEFENETLY DO THIS:
+- make info button and make it show infos [✔]
+- show infos of creators under emotes [✔]
+- make popup page updateble [?]
+- SPOOPY EMOTES/GIFS [❌]
+- limit emote/gif file size [?]
+
+to add maby:
+- channel only emotes? []
+- make emotes be displayed on obs and other? []
+
+stream stuff:
+developing GET-Emotes, a web extension for costume emotes and gifs on twitch! | web development
+
+Software and Game Development
+programierung
+webentwicklung

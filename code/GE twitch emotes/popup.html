@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <i class="fas fa-check"></i>
 </head>
 <body style="width: 500px;">
-    <h1><img src="icon_40.png" alt="GEEmoteLogo" style="text-align: center">GE Twitch Emotes</img>
+    <img class="imgInfo" src="https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/info_black.svg" alt="info button">
+    <h1><img src="https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/icon_40.jpg" alt="GEEmoteLogo" style="text-align: center">GE Twitch Emotes</img>
     </h1>
     <p style="text-align: center; font-size: large; font-weight: bold;">adds costume chat Emotes</p>
     <hr>
@@ -33,7 +33,7 @@
         width: 100%;
     }
 
-    img {
+    .grid-container img {
         width: 100px;
         height: 100px;
         cursor: copy;
@@ -80,6 +80,14 @@
         margin-right: 0px;
     }
 
+    .imgInfo {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+    }
+
     .grid-container {
         background-color: var(--EmoteListBackgroundColor);
         border-color: hsl(0, 0%, 0%);
@@ -120,6 +128,21 @@
     }
 </style>
 <style>
+
+    .Absolutecenter {
+        width:300px;
+        height:300px;
+        position:absolute;
+        top:50%;
+        left:50%;
+        background-color: var(--MainBackgroundColor);
+        border-radius: 5px;
+        border-style: solid;
+        border-width: 8px;
+        transform:translate(-50%px,-50%);
+        transform:translate(-150px, -150px);
+    }
+
     .grid-container {
       display: grid;
       grid-template-columns: auto auto auto;

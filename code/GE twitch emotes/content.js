@@ -261,7 +261,7 @@ function update() {
     }
 }
 // manages emotes list in the emotes tab on twitch and blocking emotes
-function AddNewCostumeEmote(emotename, linkex) {
+function AddNewCostumeEmote(emotename, linkex, description) {
 
     NewEmotesBlackList = getValue(LocalStorageExtName).split(",");
 
@@ -522,10 +522,10 @@ inject([
         }
 
         // console.log("Added Emote: " + TheNewArray.join("").toString());
-        //return inputtxt;
+        // return inputtxt;
         return TheNewArray.join("").toString();
     }
-    function AddNewCostumeEmote(emotename, linkex) {
+    function AddNewCostumeEmote(emotename, linkex, description) {
 
         // if (EmotesBlackList == null || EmotesBlackList == undefined) {
         //     setTimeout('AddNewCostumeEmote(''+emotename+'', ''+linkex+'')', 500);

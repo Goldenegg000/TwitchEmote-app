@@ -1,3 +1,30 @@
+// --------------------------------------
+// popup manager
+// --------------------------------------
+
+const popup = (popupmassage, okButtonText) => {
+    var newPopup = document.createElement('span');
+    newPopup.id = "thisPopUp";
+    newPopup.innerHTML = popupmassage;
+    newPopup.innerHTML += "<br>";
+    
+    newbutton = document.createElement("button");
+    newbutton.innerHTML = okButtonText;
+    newbutton.style.width = "300px";
+
+    newPopup.classList.add('Absolutecenter');
+    newbutton.onclick = () => {
+        var element = document.getElementById("thisPopUp");
+	    element.remove();
+    };
+    newPopup.appendChild(newbutton);
+    document.body.appendChild(newPopup);
+}
+
+// --------------------------------------
+// end
+// --------------------------------------
+
 function copyToClipboard(text) {
     // const elem = document.createElement('textarea');
     // elem.value = text;
@@ -7,6 +34,26 @@ function copyToClipboard(text) {
     // document.body.removeChild(elem);
     navigator.clipboard.writeText(text);
 }
+document.getElementsByClassName("imgInfo")[0].addEventListener("click", () => {
+    popup(`
+        <h3>info:</h3>
+        <li>
+            <ul>version: v.InDev</ul>
+        </li>
+        <h3>credits:</h3>
+        <li>
+            <ul>Developer:<br>
+            - Goldenegg000
+            </ul>
+            <ul>Helpers:<br>
+            <font color="darkblue">null</font>
+            </ul>
+            <ul>Beta Testers:<br>
+            - geckobooi
+            </ul>
+        </li>
+    `, "close");
+});
 const EmoteClick = (EmoteName) => {
     copyToClipboard("::"+EmoteName+"::");
 }
@@ -46,7 +93,7 @@ function allLetter(inputtxt)
     return TheNewArray.join("").toString();
 }
 
-function AddNewCostumeEmote(emotename, linkex) {
+function AddNewCostumeEmote(emotename, linkex, description) {
 
     // if (EmotesBlackList == null || EmotesBlackList == undefined) {
     //     setTimeout('AddNewCostumeEmote(''+emotename+'', ''+linkex+'')', 500);
@@ -62,6 +109,7 @@ function AddNewCostumeEmote(emotename, linkex) {
         <span class='Emotetooltip'>
             <span class='Emotetooltiptext'>costume emote: `+allLetter(emotename)+`<br>
                 <img class='CostumeEmotesDis'  src='https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/`+allLetter(emotename)+`.png' alt='`+allLetter(emotename)+`'></img>
+                <p>`+description+`</p>
             </span>
             <img class='CostumeEmotesDis' src='https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/`+allLetter(emotename)+`.png' alt='`+allLetter(emotename)+`'></img>
             <p>`+allLetter(emotename)+`</p>
@@ -74,6 +122,7 @@ function AddNewCostumeEmote(emotename, linkex) {
         <span class='Emotetooltip'>
             <span class='Emotetooltiptext'>costume gif: `+allLetter(emotename)+`<br>
                 <img class='CostumeEmotesDis'  src='https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/`+allLetter(emotename)+`.gif' alt='`+allLetter(emotename)+`'></img>
+                <p>`+description+`</p>
             </span>
             <img class='CostumeEmotesDis' src='https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/`+allLetter(emotename)+`.gif' alt='`+allLetter(emotename)+`'></img>
             <p>`+allLetter(emotename)+`</p>
@@ -107,6 +156,12 @@ document.getElementById("mySearch").addEventListener('keyup', (event) => {
 // JquerySetup.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js";
 
 const endsearch = setInterval(() => {
+    if (!window.navigator.onLine) {
+        alert("WARNING!, you dont have Internet.");
+        document.getElementsByTagName("body").innerHTML = "Sorry the page couldn't load becouse you have no internet. <a onclick='window.location.reload();'></a>";
+        clearInterval(endsearch);
+        return
+    }
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
         if (tabs[0]?.url == undefined) {
             return
