@@ -3,6 +3,7 @@ LocalStorageExtName = "GETE_settings_blacklist"; // the key name to save to twit
 LocalStorageExtNameBeta = "GETE_settings_version"; // the key name to save to twitch.tv localstorage
 ListOfEmotes = []; // the list of emotes
 EmotesBlackList = []; // the list of emotes not to display
+emoteWidth = "30px"
 
 // adds fstring globally
 const fStr = (string="") => {
@@ -85,8 +86,8 @@ const popup = (popupmassage, okButtonText) => {
 injectCss("MakesEmotesLookGood", `
 .CostumeEmotes {
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: `+emoteWidth+`;
+    height: `+emoteWidth+`;
 }
 .CostumeEmotesDis {
     cursor: pointer;
@@ -157,7 +158,7 @@ if (getValue(LocalStorageExtNameBeta) == "" || getValue(LocalStorageExtNameBeta)
 const newEmoteCheck = (thechat, emoteText, emoteimglink, emotename) => {
     try {
         if (thechat.innerText.includes(emoteText)) {
-            thechat.innerHTML = thechat.innerHTML.replace(emoteText, "<span class='Emotetooltip'><span class='Emotetooltiptext'>costume emote: "+emotename+"<br><img width='50' height='50' class='CostumeEmotesDis' onClick='EmoteClick(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span><img class='CostumeEmotes' onClick='EmoteClick(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span>");
+            thechat.innerHTML = thechat.innerHTML.replace(emoteText, "<span class='Emotetooltip'><span class='Emotetooltiptext'>costume emote: "+emotename+"<br><img width='"+emoteWidth+"' height='+"+emoteWidth+"+' class='CostumeEmotesDis' onClick='EmoteClick(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span><img class='CostumeEmotes' onClick='EmoteClick(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span>");
         }
     } catch {
     }
@@ -166,7 +167,7 @@ const newEmoteCheck = (thechat, emoteText, emoteimglink, emotename) => {
 const newEmoteCheckGif = (thechat, emoteText, emoteimglink, emotename) => {
     try {
         if (thechat.innerText.includes(emoteText)) {
-            thechat.innerHTML = thechat.innerHTML.replace(emoteText, "<span class='Emotetooltip'><span class='Emotetooltiptext'>costume gif: "+emotename+"<br><img width='50' height='50' class='CostumeEmotesDis' onClick='EmoteClickGif(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span><img class='CostumeEmotes' onClick='EmoteClickGif(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span>");
+            thechat.innerHTML = thechat.innerHTML.replace(emoteText, "<span class='Emotetooltip'><span class='Emotetooltiptext'>costume gif: "+emotename+"<br><img width='"+emoteWidth+"' height='"+emoteWidth+"' class='CostumeEmotesDis' onClick='EmoteClickGif(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span><img class='CostumeEmotes' onClick='EmoteClickGif(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span>");
         }
     } catch {
         // why tf is this catch empty!?
