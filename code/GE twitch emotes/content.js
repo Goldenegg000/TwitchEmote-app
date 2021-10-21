@@ -1,5 +1,6 @@
 // local forced defenitions DO NOT CHANGE WITHOUT ANY PURPOSE
 LocalStorageExtName = "GETE_settings_blacklist"; // the key name to save to twitch.tv localstorage
+LocalStorageExtNameBeta = "GETE_settings_version"; // the key name to save to twitch.tv localstorage
 ListOfEmotes = []; // the list of emotes
 EmotesBlackList = []; // the list of emotes not to display
 
@@ -133,6 +134,9 @@ injectCss("EmoteInfoDisplay", `
 function createItem(value) {
     localStorage.setItem(LocalStorageExtName, value);
 }
+function createItemVersion(value) {
+    localStorage.setItem(LocalStorageExtNameBeta, value);
+}
 
 // gets localstorage key value
 function getValue(nameOfItem) {
@@ -143,6 +147,10 @@ function getValue(nameOfItem) {
 // fallback if localstorage key is not available
 if (getValue(LocalStorageExtName) == null || getValue(LocalStorageExtName) == undefined) {
     createItem(" ");
+}
+// fallback if Beta key is not available
+if (getValue(LocalStorageExtNameBeta) == "" || getValue(LocalStorageExtNameBeta) == null || getValue(LocalStorageExtNameBeta) == undefined) {
+    createItemVersion("Beta");
 }
 
 // creates/adds emotes to chat
@@ -389,7 +397,7 @@ JquerySetup.onload = () => {
         $.ajax({url: "https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/public.js", success: function(result){
             eval(result);
         }});
-    `)])
+    `)]);
     
     stop = setInterval(() => {
         // "emote-picker__scroll-container"
@@ -561,16 +569,71 @@ inject([
 previusVar = "";
 
 // main start event
-setInterval(update, 500);
-setInterval(() => {
-    MegaNewEmotesBlackListVar = getValue(LocalStorageExtName);
+if (getValue(LocalStorageExtNameBeta) == "Beta") {
+    setInterval(update, 500);
+    setInterval(() => {
+        MegaNewEmotesBlackListVar = getValue(LocalStorageExtName);
 
-    if (MegaNewEmotesBlackListVar != previusVar) {
-        previusVar = MegaNewEmotesBlackListVar;
-        SetupCostumeEmotes();
-    }
-}, 100);
-window.addEventListener('popstate', function (event) {
-	// The URL changed...
-    location.reload();
-});
+        if (MegaNewEmotesBlackListVar != previusVar) {
+            previusVar = MegaNewEmotesBlackListVar;
+            SetupCostumeEmotes();
+        }
+    }, 100);
+    window.addEventListener('popstate', function (event) {
+        // The URL changed...
+        location.reload();
+    });
+} else if (getValue(LocalStorageExtNameBeta) == "βEtaDelota") {
+    document.body.onload = function () {
+        var yee = confirm('Are you sure you want to ACTIVATE "βEtaDelota" MODE!?');
+        if (yee) {
+            document.head.innerHTML = `
+                <style>
+                    html {
+                        background-color: hsl(0deg 0% 18%);
+                    }
+                    h2, p {
+                        color: hsl(0deg 100% 100%);
+                    }
+                </style>
+            `;
+    
+    
+            // basicly Jquery inplementation
+            /* <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> */
+            var JquerySetup = document.createElement("script");
+            // JquerySetup.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js";
+            JquerySetup.src = chrome.extension.getURL("JQuery/jquery.min.js");
+    
+            // OMG AJAX WORKS WTH
+            JquerySetup.onload = () => {
+                inject([scriptFromSource(` // checks for privilage and does somthing special...
+                    $.ajax({url: "https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/public.js", success: function(result){
+                        eval(result);
+                    }});
+                `)]);
+            }
+    
+            document.body.innerHTML = `
+                <h2>Youtube:</h2>
+                <img style="width: 500px; height: 500px;" src="https://yt3.ggpht.com/ytc/AKedOLRmAkruKl81oZS7HqtHrrq4iwAYaodyf6gtHHy1ZA=s48-c-k-c0x00ffffff-no-rj"></img>
+                <p>deam this quality is bad from youtube<p>
+                <h2>Twitch:</h2>
+                <img style="width: 500px; height: 500px;" src="https://static-cdn.jtvnw.net/jtv_user_pictures/792455c2-3bb1-4fa5-865d-45743690b90d-profile_image-70x70.png"></img>
+                <h2>Twitter:</h2>
+                <img style="width: 500px; height: 500px;" src="https://pbs.twimg.com/profile_images/1440925081358589955/zTROKYeI_reasonably_small.jpg"></img>
+                <h2>TikTok:</h2>
+                <img style="width: 500px; height: 500px;" src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/c6036764d26637dadd2716f59d125d05~c5_720x720.jpeg?x-expires=1634828400&x-signature=PIgAr0xIlBBo9uwmIWn2cpbxrHA%3D"></img>
+                <p>bruh TikTok dosnt compress thyre images at all. LOL<p>
+                <h2>Instagram:</h2>
+                <p>dosnt work becouse Instgram finds it funny to NOT ALLOW IMAGES TO RENDER ON NONE INSTGRAM PAGES. WHYYYYYYYY!?!?!?!<p>
+                `;
+            } else {
+                createItemVersion("Beta")
+                alert('set version to "BETA".');
+                window.location.reload();
+            }
+        }
+} else {
+    alert("ERROR: Invalid Version identifier!\nGET-Emotes will not be enabled!");
+}
