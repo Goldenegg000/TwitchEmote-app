@@ -268,6 +268,27 @@ function update() {
             }
         }
     }
+
+    // for my ego and ad revenue lol XD
+    var docs = document.getElementsByClassName("chat-author__display-name")
+    for (let i = 0; i < docs.length; i++) {
+        const element = docs[i];
+        if (element.innerHTML == "goldenegg000") {
+            element.innerHTML = '<span style="color: gold"><svg aria-hidden="true" width="20px" focusable="false" data-prefix="fas" data-icon="crown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-crown fa-w-20 fa-3x"><path fill="currentColor" d="M528 448H112c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm64-320c-26.5 0-48 21.5-48 48 0 7.1 1.6 13.7 4.4 19.8L476 239.2c-15.4 9.2-35.3 4-44.2-11.6L350.3 85C361 76.2 368 63 368 48c0-26.5-21.5-48-48-48s-48 21.5-48 48c0 15 7 28.2 17.7 37l-81.5 142.6c-8.9 15.6-28.9 20.8-44.2 11.6l-72.3-43.4c2.7-6 4.4-12.7 4.4-19.8 0-26.5-21.5-48-48-48S0 149.5 0 176s21.5 48 48 48c2.6 0 5.2-.4 7.7-.8L128 416h384l72.3-192.8c2.5.4 5.1.8 7.7.8 26.5 0 48-21.5 48-48s-21.5-48-48-48z" class=""></path></svg>goldenegg000</span>';
+        }
+    }
+    // for supporters that helped me do this stuff :) love yall
+    const helpers = ["geckobooi", "Redknobz", "FelipeRattu"];
+    helpers.forEach((item) => {
+        for (let i = 0; i < docs.length; i++) {
+            const element = docs[i];
+            if (element.innerHTML == item) {
+                element.innerHTML = '<span style="color: blue"><svg aria-hidden="true" width="20px" focusable="false" data-prefix="fas" data-icon="user-check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-user-check fa-w-20 fa-3x"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4zm323-128.4l-27.8-28.1c-4.6-4.7-12.1-4.7-16.8-.1l-104.8 104-45.5-45.8c-4.6-4.7-12.1-4.7-16.8-.1l-28.1 27.9c-4.7 4.6-4.7 12.1-.1 16.8l81.7 82.3c4.6 4.7 12.1 4.7 16.8.1l141.3-140.2c4.6-4.7 4.7-12.2.1-16.8z" class=""></path></svg></span>'+item;
+            }
+        }
+        return;
+    });
+    
 }
 // manages emotes list in the emotes tab on twitch and blocking emotes
 function AddNewCostumeEmote(emotename, linkex, description) {
