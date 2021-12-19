@@ -1,27 +1,10 @@
 // local forced defenitions DO NOT CHANGE WITHOUT ANY PURPOSE
-LocalStorageExtName = "GETE_settings_blacklist"; // the key name to save to twitch.tv localstorage
-LocalStorageExtNameBeta = "GETE_settings_version"; // the key name to save to twitch.tv localstorage
-ListOfEmotes = []; // the list of emotes
-EmotesBlackList = []; // the list of emotes not to display
-emoteWidth = "30px"
-
-// adds fstring globally
-const fStr = (string="") => {
-    end_pos = 0;
-    
-
-    while (true) { // yes "while (true)" should never be used but i like using break's so its fine.
-        var start_pos = string.indexOf('{') + 1;
-        var end_pos = string.indexOf('}',start_pos);
-        var text_to_get = string.substring(start_pos,end_pos);
-        if (start_pos == -1 || end_pos == -1) { 
-            break;
-        }
-        string = string.replace("{" + text_to_get + "}", eval(text_to_get));
-    }
-    
-    return string;
-}
+const LocalStorageExtName = "GETE_settings_blacklist"; // the key name to save to twitch.tv localstorage
+const LocalStorageExtNameBeta = "GETE_settings_version"; // the key name to save to twitch.tv localstorage
+let ListOfEmotes = []; // the list of emotes
+let EmotesBlackList = []; // the list of emotes not to display
+let helpers = ["geckobooi", "Redknobz", "FelipeRattu"]; // displays special icon for helpers
+let emoteWidth = "30px"; // width of the emotes
 
 // makes css injecter
 const injectCss = (id, css) => {
@@ -42,7 +25,7 @@ const injectHTML = (id, html) => {
 }
 
 // --------------------------------------
-// popup manager
+// popup manager - unused
 // --------------------------------------
 
 // used for closing a popup
@@ -129,6 +112,24 @@ injectCss("EmoteInfoDisplay", `
 .Emotetooltip:hover .Emotetooltiptext {
     visibility: visible;
 }
+
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}
 `);
 
 // creates/changes localstorage key with value
@@ -161,6 +162,7 @@ const newEmoteCheck = (thechat, emoteText, emoteimglink, emotename) => {
             thechat.innerHTML = thechat.innerHTML.replace(emoteText, "<span class='Emotetooltip'><span class='Emotetooltiptext'>costume emote: "+emotename+"<br><img width='"+emoteWidth+"' height='+"+emoteWidth+"+' class='CostumeEmotesDis' onClick='EmoteClick(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span><img class='CostumeEmotes' onClick='EmoteClick(`"+emotename+"`)' src='"+emoteimglink+"' alt='"+emotename+"'></img></span>");
         }
     } catch {
+        // why tf is this catch empty!?
     }
 }
 // creates/adds emote gifs to chat
@@ -274,11 +276,11 @@ function update() {
     for (let i = 0; i < docs.length; i++) {
         const element = docs[i];
         if (element.innerHTML == "goldenegg000") {
-            element.innerHTML = '<span style="color: gold"><svg aria-hidden="true" width="20px" focusable="false" data-prefix="fas" data-icon="crown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-crown fa-w-20 fa-3x"><path fill="currentColor" d="M528 448H112c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm64-320c-26.5 0-48 21.5-48 48 0 7.1 1.6 13.7 4.4 19.8L476 239.2c-15.4 9.2-35.3 4-44.2-11.6L350.3 85C361 76.2 368 63 368 48c0-26.5-21.5-48-48-48s-48 21.5-48 48c0 15 7 28.2 17.7 37l-81.5 142.6c-8.9 15.6-28.9 20.8-44.2 11.6l-72.3-43.4c2.7-6 4.4-12.7 4.4-19.8 0-26.5-21.5-48-48-48S0 149.5 0 176s21.5 48 48 48c2.6 0 5.2-.4 7.7-.8L128 416h384l72.3-192.8c2.5.4 5.1.8 7.7.8 26.5 0 48-21.5 48-48s-21.5-48-48-48z" class=""></path></svg>goldenegg000</span>';
+            element.innerHTML = '<span class="rainbow_text_animated"><svg style="color: gold" aria-hidden="true" width="20px" focusable="false" data-prefix="fas" data-icon="crown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-crown fa-w-20 fa-3x"><path fill="currentColor" d="M528 448H112c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm64-320c-26.5 0-48 21.5-48 48 0 7.1 1.6 13.7 4.4 19.8L476 239.2c-15.4 9.2-35.3 4-44.2-11.6L350.3 85C361 76.2 368 63 368 48c0-26.5-21.5-48-48-48s-48 21.5-48 48c0 15 7 28.2 17.7 37l-81.5 142.6c-8.9 15.6-28.9 20.8-44.2 11.6l-72.3-43.4c2.7-6 4.4-12.7 4.4-19.8 0-26.5-21.5-48-48-48S0 149.5 0 176s21.5 48 48 48c2.6 0 5.2-.4 7.7-.8L128 416h384l72.3-192.8c2.5.4 5.1.8 7.7.8 26.5 0 48-21.5 48-48s-21.5-48-48-48z" class=""></path></svg>goldenegg000</span>';
         }
     }
     // for supporters that helped me do this stuff :) love yall
-    const helpers = ["geckobooi", "Redknobz", "FelipeRattu"];
+    let helpers = ["geckobooi", "Redknobz", "FelipeRattu"];
     helpers.forEach((item) => {
         for (let i = 0; i < docs.length; i++) {
             const element = docs[i];
@@ -435,6 +437,7 @@ JquerySetup.onload = () => {
 document.head.appendChild(JquerySetup); // appends Jquery to page
 
 const SetupCostumeEmotes = () => {
+
     MyEmotePicker.innerHTML = `
     <div class="Layout-sc-nxg1ff-0 emote-picker__content-block"></div>
     <p class="emote-grid-section__header-title kNETjQ bupcyV"><img style="width: 50px;" src="https://raw.githubusercontent.com/Goldenegg000/TwitchEmote/main/icon_40.jpg">GE Twitch Emotes<br>
@@ -607,6 +610,7 @@ if (getValue(LocalStorageExtNameBeta) == "Beta") {
     });
 } else if (getValue(LocalStorageExtNameBeta) == "βEtaDelota") {
     document.body.onload = function () {
+
         var yee = confirm('Are you sure you want to ACTIVATE "βEtaDelota" MODE!?');
         if (yee) {
             document.head.innerHTML = `
